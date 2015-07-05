@@ -1,0 +1,23 @@
+.navbar-brand {
+	padding-right: 10%;
+	padding-bottom: 25px;
+	color:#00d6ff;
+}
+.navbar-brand a{
+	color: #fff;
+}
+.navbar-right {
+	margin-right: 10px;
+}
+.nav-pills a{
+	color: #00d6ff;
+}
+.nav-pills a:hover {
+	color: #002d4c;
+}
+.nav-pills li.active a:focus {
+	color: #002d4c;
+}
+nav {
+	background-color: #005b99;
+}
