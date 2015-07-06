@@ -1,20 +1,102 @@
-.navbar-brand {
-	padding-right: 10%;
-	padding-bottom: 25px;
-	color:#00d6ff;
+/********************************
+	
+Normalize browser style defaults
+
+********************************/
+
+body,nav,header,footer,h1,h2,h3,h4,a,li,ul,ol,p {
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
-.navbar-right {
-	margin-right: 10px;
+
+/********************************
+	
+Spacing and alignment
+
+********************************/
+
+header {
+	text-align: center
 }
-.nav-pills a{
-	color: #00d6ff;
+
+nav {
+	text-align: center;
+	padding: 10px 0;
+	clear: both;
 }
-.nav-pills a:hover {
-	color: #002d4c;
+
+nav li {
+	display: inline;
+	margin-left: 1%;
+	padding: 0 0.5em;
 }
-.jumbotron {
-	color: #007acc;
+nav li:last-child {
+	margin-right: 1%;
+}
+
+nav li a {
+	text-decoration: none;
+}
+
+.main-content {
+	margin: 0 auto;
+	padding: 100px 0;
+	width: 95%;
+}
+footer {
+	clear:both;
+	margin-left: 20px
+}
+.main-content h1{
+	padding-bottom: 20px;
+}
+/********************************
+	
+Colors and fonts
+
+********************************/
+
+body {
+	background: #fff url("../images/sunset.jpg") top center no-repeat;
+	background-size: 1750px;
+}
+
+header {
+	background-color: #000;
 }
 nav {
-	background-color: #000;
+	background-color: #000
+}
+header h1 {
+	color: #fff;
+}
+
+nav li {
+	background-color: #999;
+	border-radius: 4px;
+}
+nav li a {
+	color: #000;
+}
+
+nav li:hover {
+	background-color: darkred;
+	color: white;
+}
+nav a:hover {
+	color: white;
+}
+#active li{
+	background-color: white;
+}
+
+.main-content {
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+small {
+	color: lightgray;
+	border-bottom: 2px solid lightgray
 }
