@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Todd Levin | Projects</title>
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
     <link href="css/main.css" rel="stylesheet">
   </head>
 
@@ -23,22 +24,42 @@
     <div class = "calculator">
       <h1>Simple Calculator</h1>
       <p></p>
-      <p>Description: a javascript backed online calculator </p>
-      <table>
+      <p><strong>Description</strong>: a javascript backed calculator </p>
+
+      </table>
+      <table class = "calc-body">
         <tr>
-          <td id= "result-window"></td>
+          <td id= "result-window" colspan = 4></td>
+        </tr>
         <tr>
           <td id = "clear">C</td>
           <td id ="plus-minus">+/-</td>
           <td id ="percent">%</td>
-          <td id ="divide">/</td>
+          <td class = "operator">/</td>
         </tr>
         <tr>
-          <td id ="seven">7</td>
-          <td id = "eight">8</td>
-          <td id = "nine">9</td>
-          <td id = "multiply">X</td>
+          <td class= "number">7</td>
+          <td class= "number">8</td>
+          <td class= "number">9</td>
+          <td class = "operator">*</td>
         </tr>
+        <tr>
+          <td class= "number">4</td>
+          <td class= "number">5</td>
+          <td class= "number">6</td>
+          <td class = "operator">-</td>
+        </tr>
+          <td class= "number">1</td>
+          <td class= "number">2</td>
+          <td class= "number">3</td>
+          <td class = "operator">+</td>
+        </tr>
+        <tr>
+          <td class= "number">0</td>
+          <td id = "decimal">.</td>
+          <td id = "equal" colspan = 2>=</td>
+        </tr>
+
       </table>
 
     </div>

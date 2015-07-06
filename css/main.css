@@ -12,7 +12,7 @@ body,nav,header,footer,h1,h2,h3,h4,a,li,ul,ol,p {
 
 /********************************
 	
-Spacing and alignment
+General Spacing and alignment
 
 ********************************/
 
@@ -53,7 +53,7 @@ footer {
 }
 /********************************
 	
-Colors and fonts
+General Colors and fonts
 
 ********************************/
 
@@ -99,4 +99,46 @@ nav a:hover {
 small {
 	color: lightgray;
 	border-bottom: 2px solid lightgray
+}
+
+/********************************
+	
+Page: Projects;
+
+********************************/
+
+.calculator{
+	text-align: center;
+}
+.calculator p {
+	padding-bottom: 20px;
+}
+.calc-body {
+	background-color: #eee;
+	border-radius: 10px;
+	margin: 0 auto;
+	width: 200px;
+	height: 300px;
+}
+#result-window {
+	text-align: right;
+	background-color: #999;
+	border-radius: 20px;
+	padding: 5px 1px;
+	font-family: "VT323";
+	font-size: 20px;
+	color: black;
+}
+.calc-body td {
+	width: 20px;
+	height: 20px;
+	padding: 3px;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 25px;
+	cursor: pointer;
+}
+.calc-body td:hover{
+	background-color: #000;
+	color: #fff;
 }
