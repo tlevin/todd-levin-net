@@ -58,7 +58,7 @@ General Colors and fonts
 ********************************/
 
 body {
-	background: #fff url("../images/sunset.jpg") top center no-repeat;
+	background-color: #999;
 	background-size: 1750px;
 }
 
@@ -109,6 +109,12 @@ Page: Projects;
 
 .calculator{
 	text-align: center;
+	width: 95%;
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 10px 0;
+	margin: 0 auto;
+	border-bottom: 3px solid black;
 }
 .calculator p {
 	padding-bottom: 20px;
@@ -119,6 +125,7 @@ Page: Projects;
 	margin: 0 auto;
 	width: 200px;
 	height: 300px;
+	border: 2px solid black;
 }
 #result-window {
 	text-align: right;
@@ -141,4 +148,31 @@ Page: Projects;
 .calc-body td:hover{
 	background-color: #000;
 	color: #fff;
+}
+
+/***********
+Tic Tac Toe
+***********/
+
+.tictactoe {
+	text-align: center;
+	width: 95%;
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 30px 0;
+	margin: 10px auto;
+	border-bottom: 2px solid black
+}
+.gameboard {
+	margin: 20px auto;
+}
+.gameboard td {
+	height: 50px;
+	width: 50px;
+	background-color: #999;
+	border: 2px solid black;
+	cursor:pointer;
+}
+.gameboard td:hover {
+	background-color: darkred;
 }
