@@ -3,9 +3,7 @@ $(document).ready(function(){
 	/****************
 	Simple Calculator
 	*****************/
-
-
-	var number = "", secondNumber = "", operator = "", answer=0;
+	var number = "", secondNumber = "", operator = "", answer=0, temp = 0;
 	var result = $("#result-window");
 	result.text("0");
 
@@ -18,6 +16,7 @@ $(document).ready(function(){
 	function resolveAnswer(answer){ //prints answer to display, clears values for next operation.
 		result.text(answer);
 		verifyLength(answer)
+		temp = number
 		number = "";
 		secondNumber = "";
 	}
@@ -47,6 +46,7 @@ $(document).ready(function(){
 		number = "";
 		secondNumber ="";
 		answer = "";
+		temp = "";
 	})
 	
 	$(".operator").click(function(){ //stores first number, and operator.
@@ -71,6 +71,11 @@ $(document).ready(function(){
 
 	
 	$("#equal").click(function(){
+		if(number === "" && secondNumber === ""){
+			number = temp;
+			secondNumber = answer;
+		}
+
 		if(operator === "+"){
 			answer = parseInt(number)+parseInt(secondNumber);
 			resolveAnswer(answer);
@@ -86,21 +91,29 @@ $(document).ready(function(){
 		}
 	})
 
-
-
 /*************************************
 	Tic Tac Toe
 **************************************/
-
-var turnCount = 1;
-
-function isTurn(){
-	if(turnCount%2 === 0){
-		return false;
+var turnCount = 0, player = 0;
+function currentPlayer(){
+	if(turnCount %2 !== 0){
+		player = 1;
+	} else {
+		player = -1;
 	}
-	return true;
 }
-
-
+function playerMark(player){
+	return player == 1 ? "X" : "O"
+}
+$(".gamesquare").click(function(){
+	turnCount++;
+	if(!$(this).hasClass("taken")){
+		$(this).text(playerMark(currentPlayer))
+		$(this).addClass("taken");
+	} else {
+		alert("Please choose a different square.")
+	}
+	
+})
 
 })

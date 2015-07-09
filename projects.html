@@ -2,24 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todd Levin | Projects</title>
     <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
     <link href="css/main.css" rel="stylesheet">
   </head>
 
   <body>
-    <header>
-      <h1>Todd Levin</h1>
-    </header>
+    <div class = "fixednav">
+      <header>
+        <h1><a href = "index.html">Todd Levin</a></h1>
+      </header>
 
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li id="active"><a href="projects.html">Projects</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li id="active"><a href="projects.html">Projects</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
 
     <div class = "calculator">
       <h1>Simple Calculator</h1>
@@ -67,25 +69,25 @@
     <div class = "tictactoe">
 
       <h1>Tic-Tac-Toe</h1>
-      <p><strong>Description:</strong>A single player tic-tac-toe game.</p>
-      <table class="gameboard">
+      <p><strong>Description:</strong>A two player tic-tac-toe game.</p>
+      <table class = "gameboard">
         <tr>
-          <td id ="topleft"></td>
-          <td id ="topcenter"></td>
-          <td id = "topright"></td>
+          <td class= "gamesquare" id = "1"></td>
+          <td class= "gamesquare" id = "2"></td>
+          <td class= "gamesquare" id = "3"></td>
         </tr>
         <tr>
-          <td id ="centerleft"></td>
-          <td id ="center"></td>
-          <td id ="centerright"></td>
+          <td class= "gamesquare" id = "4"></td>
+          <td class= "gamesquare" id = "5"></td>
+          <td class= "gamesquare" id = "6"></td>
         </tr>
         <tr>
-          <td id = "bottomleft"></td>
-          <td id = "bottomcenter"></td>
-          <td id = "bottomright"></td>
-        </tr>
+          <td class= "gamesquare" id = "7"></td>
+          <td class= "gamesquare" id = "8"></td>
+          <td class= "gamesquare" id = "9"></td>
+        </tr>  
       </table>
-      <p id = "messagecenter">Your turn!</p>
+      <p id = "messagecenter"></p>
     </div>
     <footer>
       <p>&copy; 2015 Todd Levin</p>
