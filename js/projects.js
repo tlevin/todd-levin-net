@@ -3,117 +3,183 @@ $(document).ready(function(){
 	/****************
 	Simple Calculator
 	*****************/
-	var number = "", secondNumber = "", operator = "", answer=0, temp = 0;
-	var result = $("#result-window");
-	result.text("0");
+	var Calculator = function(){ //declare a calculator object constructor to isolate variables from global scope
+		 this.number = "", this.secondNumber = "", this.operator = "", this.answer=0, this.temp = 0;
+			this.result = $("#result-window");
+		this.result.text("0");
 
-	function verifyLength(str){ //makes sure input isn't larger than display can handle.
+	this.verifyLength = function(str){ //makes sure input isn't larger than display can handle.
 		if(str.length > 14){
-			result.text("Error");
-			number = "";
+			this.result.text("Error");
+			this.number = "";
 		}
 	}
-	function resolveAnswer(answer){ //prints answer to display, clears values for next operation.
-		result.text(answer);
-		verifyLength(answer)
-		temp = number
-		number = "";
-		secondNumber = "";
+	this.resolveAnswer = function(answer){ //prints answer to display, clears values for next operation.
+		this.result.text(this.answer);
+		this.verifyLength(this.answer)
+		this.temp = this.number
+		this.number = "";
+		this.secondNumber = "";
 	}
-
-
+};
+	var calc = new Calculator(); //initiate new calc object
 
 	$(".number").click(function(){
-		number += $(this).html();
-		result.text(number);
-		verifyLength(number)
+		calc.number += $(this).html();
+		calc.result.text(calc.number);
+		calc.verifyLength(calc.number)
 
 	})
 
 	$("#decimal").click(function(){
-		if(number.indexOf(".") === -1){
-			number += "."
+		if(calc.number.indexOf(".") === -1){
+			calc.number += "."
 		} 
 	})
 
 	$("#clear").click(function(){
-		result.text("0");
-		number = "";
+		calc.result.text("0");
+		calc.number = "";
 	})
 
 	$("#clearall").click(function(){
-		result.text("0")
-		number = "";
-		secondNumber ="";
-		answer = "";
-		temp = "";
+		calc.result.text("0")
+		calc.number = "";
+		calc.secondNumber ="";
+		calc.answer = "";
+		calc.temp = "";
 	})
 	
 	$(".operator").click(function(){ //stores first number, and operator.
-		if(number === ""){
-			number = answer;
+		if(calc.number === ""){
+			calc.number = calc.answer;
 		}
-		secondNumber = number;
-		number = "";
-		operator = $(this).html();
-		result.text("0")
+		calc.secondNumber = calc.number;
+		calc.number = "";
+		calc.operator = $(this).html();
+		calc.result.text("0")
 	})
 	
 	$("#plus-minus").click(function(){ 
-		if(number[0] === "-"){
-			number = number.substring(1);
-			result.text(number);
+		if(calc.number[0] === "-"){
+			calc.number = calc.number.substring(1);
+			calc.result.text(calc.number);
 		} else {
-			number = "-" + number;
-			result.text(number);
+			calc.number = "-" + calc.number;
+			calc.result.text(calc.number);
 		}
 	})
 
 	
 	$("#equal").click(function(){
-		if(number === "" && secondNumber === ""){
-			number = temp;
-			secondNumber = answer;
+		if(calc.number === "" && calc.secondNumber === ""){ //if equals button is hit without entering any new numbers
+			calc.number = calc.temp;
+			calc.secondNumber = calc.answer;
 		}
 
-		if(operator === "+"){
-			answer = parseInt(number)+parseInt(secondNumber);
-			resolveAnswer(answer);
-		} else if (operator === "-"){
-			answer = parseInt(secondNumber)-parseInt(number);
-			resolveAnswer(answer);
-		} else if (operator === "*"){
-			answer = parseInt(secondNumber)*parseInt(number);
-			resolveAnswer(answer);
-		} else if (operator === "/"){
-			answer = parseInt(secondNumber)/parseInt(number);
-			resolveAnswer(answer);
+		if(calc.operator === "+"){
+			calc.answer = parseFloat(calc.number)+parseFloat(calc.secondNumber);
+			calc.resolveAnswer(calc.answer);
+		} else if (calc.operator === "-"){
+			calc.answer = parseFloat(calc.secondNumber)-parseFloat(calc.number);
+			calc.resolveAnswer(calc.answer);
+		} else if (calc.operator === "*"){
+			calc.answer = parseFloat(calc.secondNumber)*parseFloat(calc.number);
+			calc.resolveAnswer(calc.answer);
+		} else if (calc.operator === "/"){
+			calc.answer = parseFloat(calc.secondNumber)/parseFloat(calc.number);
+			calc.resolveAnswer(calc.answer);
 		}
 	})
 
 /*************************************
 	Tic Tac Toe
 **************************************/
-var turnCount = 0, player = 0;
-function currentPlayer(){
-	if(turnCount %2 !== 0){
-		player = 1;
-	} else {
-		player = -1;
+
+var TicTacToe = function(){
+	this.turnCount = 1;
+	this.player = 0;
+	this.result = []
+	this.gameOver = false;
+	this.initBoard = function(){
+		for (var i = 0; i < 3; i++) {
+			this.result[i] = []
+			for (var j = 0; j < 3; j++) {
+				this.result[i][j] = 0
+			};
+		};
 	}
+	this.trackMove = function(value){
+		this.result[Math.floor(value/3)][value - (3*(Math.floor(value/3)))] = this.player;
+	}
+
+	this.currentPlayer = function(){
+		if(this.turnCount %2 !== 0){
+			this.player = 1;
+		} else {
+			this.player = -1;
+		}
+	}
+	this.playerMark = function(player){
+	return this.player === 1 ? "X" : "O"
 }
-function playerMark(player){
-	return player == 1 ? "X" : "O"
+	this.checkAcross = function() {
+		for (var i = 0; i < 3; i++) {
+			var totalAcross = this.result[i][0] + this.result[i][1] + this.result[i][2]
+			if(totalAcross === 3 || totalAcross === -3){
+				return true
+		}
+	} return false;
 }
+	this.checkDown = function(){
+		for (var i = 0; i < 3; i++) {
+			var totalDown = this.result[0][i] + this.result[1][i] + this.result[2][i]
+			if(totalDown === 3 || totalDown === -3){
+				return true
+		}
+	} return false;
+}
+	this.checkCross = function(){
+		var crossLeft = this.result[0][0] + this.result[1][1]+ this.result[2][2]
+		var crossRight = this.result[0][2] + this.result[1][1] + this.result[2][0]
+		
+		if(crossRight === 3 || crossRight === -3 || crossLeft === 3 || crossLeft === -3){
+			return true
+		}
+		return false;
+	}
+	this.checkWin = function(){
+		if(this.checkAcross() || this.checkDown() || this.checkCross()){
+			$("#messagecenter").text(this.playerMark(this.currentPlayer) + " has won!")
+			this.gameOver = true;
+		}
+	}
+	this.outMoves = function(){
+		if(this.turnCount >9){
+			$("#messagecenter").text("The game has resulted in a draw")
+			this.gameOver = true;
+		}
+	}
+	
+};
+var game = new TicTacToe();
+game.initBoard();
 $(".gamesquare").click(function(){
-	turnCount++;
+	if(game.gameOver === false){
+		game.currentPlayer();
 	if(!$(this).hasClass("taken")){
-		$(this).text(playerMark(currentPlayer))
+		$(this).text(game.playerMark(game.currentPlayer))
 		$(this).addClass("taken");
+		game.trackMove($(this).attr("id"))
+		game.turnCount++
 	} else {
 		alert("Please choose a different square.")
 	}
-	
+	game.checkWin();
+	game.outMoves();
+	}
 })
-
+$("#reloadButton").click(function(){
+	location.reload();
+})
 })
