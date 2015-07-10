@@ -209,13 +209,15 @@ var Hangman = function(){
 		};
 	this.checkWin = function(){
 		if(this.newWord === this.secretWord){
-			$("#resultText").text("You Win!")
+			$("#resultText").text("You Win!");
+			$("#resultText").removeClass("hide");
 			this.hasWon = true;
 			$("#letterEntry").addClass("hide");
 			$("#hangReloadButton").removeClass("hide");
 		}
 		if(this.turnsLeft === 0){
-			$("#resultText").text("You lost, try again.")
+			$("#resultText").removeClass("hide");
+			$("#resultText").text("Sorry, you lost.  The secret word was '" + this.secretWord+"'")
 			$("#letterEntry").addClass("hide");
 			$("#hangReloadButton").removeClass("hide");
 		}
@@ -257,27 +259,30 @@ $("#newGame").click(function(){
 	$("#textEntry").removeClass("hide");
 
 })
-	
-$("form").bind("keydown", function(e) { //deactivates "enter" key for form input
-   if (e.keyCode === 13) return false;
- });
+$(document).keypress(
+    function(event){
+     if (event.which == '13') {
+        event.preventDefault();
+      }
 
-$("#doIt").click(function(){
-	hGame.secretWord = $("#textInput").val();
-	if(hGame.secretWord.length > 30){
-		$("#textEntry").fadeOut()
-		$("#resultText").fadeIn(10)
-		$("#resultText").text("Please enter a smaller word");
-		$("#resultText").fadeOut(1000)
-		$("#textEntry").fadeIn(10)
-	} else if (hGame.secretWord){
-		$("#textEntry").addClass("hide");
-		$("#hangGame").removeClass("hide");
-		hGame.convertWord(hGame.secretWord);
-		hGame.updateMessage();
-		$("#hangboard").css('background-image', 'url(./images/hang5.png)');
+
+});
+
+$("#textEntry").keyup(function(){
+	if(event.which === 13){
+		hGame.secretWord = $("#textInput").val();
+		if(hGame.secretWord.length > 30){
+			$("label").text("Use a smaller word")
+		} else if (hGame.secretWord){
+			$("#textEntry").addClass("hide");
+			$("#hangGame").removeClass("hide");
+			hGame.convertWord(hGame.secretWord);
+			hGame.updateMessage();
+			$("#hangboard").css('background-image', 'url(./images/hang5.png)');
+		};
 	};
-})
+
+});
 
 $("#letterEntry").keyup(function(){
 	if(hGame.turnsLeft > 0 && hGame.hasWon === false){
@@ -286,7 +291,7 @@ $("#letterEntry").keyup(function(){
 		hGame.checkWin();
 		hGame.updateMessage();
 		$("#letterEntry input").val("");
-} 
+	} 
 })
 
 $("#hangReloadButton").click(function(){
