@@ -91,6 +91,34 @@
       <h1 id = "messagecenter"></h1>
       <div id = "reloadButton">Play new Game</div>
     </div>
+
+    <div class = "hangman">
+      <h1>Hangman</h1>
+      <p><strong>Description:</strong> Guess the word before you're at the end of your rope!</p>
+
+
+      <div id = "hangboard">
+        <h4 id = "resultText"class = hide></h4>
+        <div id = "newGame">Click here for a new game</div>
+        <form id = "textEntry" class = "hide">
+          <label>Enter your secret word!</label>
+          <input id="textInput" type="text" placeholder="Enter your word here" value = "">
+          <button id = "doIt" type="button">Let's play!</button>
+        </form>
+        <div id = "hangGame" class = "hide">
+
+            <form id = "letterEntry">
+              <label>Enter a letter to guess!</label>
+              <input id = "letterInput" type = "text" value = "">
+            </form>
+           <div id = "hangReloadButton" class = "hide">Play new Game</div> 
+          <h2 id = "messageDisplay">this is the secret word<h2>
+          <p id = "lettersUsed">Letters guessed: </p>
+        </div>
+      </div>
+    </div>
+
+
     <footer>
       <p>&copy; 2015 Todd Levin</p>
     </footer> 

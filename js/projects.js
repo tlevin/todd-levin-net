@@ -182,4 +182,115 @@ $(".gamesquare").click(function(){
 $("#reloadButton").click(function(){
 	location.reload();
 })
+
+/*************************************
+	Hangman
+**************************************/
+
+
+var Hangman = function(){
+	this.secretWord = "";
+	this.newWord = "";
+	this.keyEntered = "";
+	this.turnsLeft = 5;
+	this.lettersUsed = ""
+	this.hasWon = false;
+	this.convertWord= function(str){
+		str = str.toLowerCase();
+		this.secretWord = str;
+		for (var i = 0; i < str.length; i++) {
+			if(str[i].match(/[a-z]/)){
+				this.newWord += "_"
+			}
+			else {
+				this.newWord += str[i]
+			}
+		};
+		};
+	this.checkWin = function(){
+		if(this.newWord === this.secretWord){
+			$("#resultText").text("You Win!")
+			this.hasWon = true;
+			$("#letterEntry").addClass("hide");
+			$("#hangReloadButton").removeClass("hide");
+		}
+		if(this.turnsLeft === 0){
+			$("#resultText").text("You lost, try again.")
+			$("#letterEntry").addClass("hide");
+			$("#hangReloadButton").removeClass("hide");
+		}
+	}
+	this.updatePic = function(){
+		$('#hangboard').css({'background-image': 'url(./images/hang' + this.turnsLeft + '.png)'})
+
+		}
+
+	this.updateMessage = function(){
+		$("#messageDisplay").text(this.newWord)
+		$("#lettersUsed").text(("Letters used: " + this.lettersUsed))
+	}
+
+	this.checkLetter = function(key){
+		if(key.match(/[a-z]/)){
+			if(this.secretWord.indexOf(key)=== -1){
+				while(this.lettersUsed.indexOf(key) === -1){
+					this.lettersUsed += key;
+					this.turnsLeft--;
+					this.updatePic(this.turnsLeft);
+					
+				}
+		}	else{
+				for (var i = 0; i < this.secretWord.length; i++) {
+					if(this.secretWord[i].match(key)){
+						this.newWord = this.newWord.substring(0,i) + key + this.newWord.substring(i+1,this.newWord.length);
+					}
+				};
+		} 
+	}
+}
+}
+
+var hGame = new Hangman();
+
+$("#newGame").click(function(){
+	$(this).addClass("hide");
+	$("#textEntry").removeClass("hide");
+
+})
+	
+$("form").bind("keydown", function(e) { //deactivates "enter" key for form input
+   if (e.keyCode === 13) return false;
+ });
+
+$("#doIt").click(function(){
+	hGame.secretWord = $("#textInput").val();
+	if(hGame.secretWord.length > 30){
+		$("#textEntry").fadeOut()
+		$("#resultText").fadeIn(10)
+		$("#resultText").text("Please enter a smaller word");
+		$("#resultText").fadeOut(1000)
+		$("#textEntry").fadeIn(10)
+	} else if (hGame.secretWord){
+		$("#textEntry").addClass("hide");
+		$("#hangGame").removeClass("hide");
+		hGame.convertWord(hGame.secretWord);
+		hGame.updateMessage();
+		$("#hangboard").css('background-image', 'url(./images/hang5.png)');
+	};
+})
+
+$("#letterEntry").keyup(function(){
+	if(hGame.turnsLeft > 0 && hGame.hasWon === false){
+		hGame.keyEntered = String.fromCharCode(event.which).toLowerCase()
+		hGame.checkLetter(hGame.keyEntered);
+		hGame.checkWin();
+		hGame.updateMessage();
+		$("#letterEntry input").val("");
+} 
+})
+
+$("#hangReloadButton").click(function(){
+	location.reload();
+})
+
 })
